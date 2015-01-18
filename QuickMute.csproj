@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{44ADA825-2207-4A6B-9410-8B857A847C13}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>QuickMute</RootNamespace>
+    <AssemblyName>QuickMute</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <ReleaseVersion>1.00</ReleaseVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <CustomCommands>
+      <CustomCommands>
+        <Command type="AfterBuild" command="./install.sh" />
+      </CustomCommands>
+    </CustomCommands>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\lib\0.90\Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>..\lib\0.90\UnityEngine.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuickMute.cs" />
+    <Compile Include="ToolbarWrapper.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <None Include="COPYING" />
+    <None Include="QuickMute.version" />
+    <None Include="README.md" />
+    <None Include="GameData\QuickMute\Config.txt" />
+    <None Include="GameData\QuickMute\Plugins\QuickMute.dll" />
+    <None Include="Mute.xcf" />
+    <None Include="GameData\QuickMute\Textures\BlizzyToolBar_mute.png" />
+    <None Include="GameData\QuickMute\Textures\BlizzyToolBar_sound.png" />
+    <None Include="GameData\QuickMute\Textures\Icon_mute.png" />
+    <None Include="GameData\QuickMute\Textures\Icon_sound.png" />
+    <None Include="GameData\QuickMute\Textures\StockToolBar_mute.png" />
+    <None Include="GameData\QuickMute\Textures\StockToolBar_sound.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="GameData\" />
+    <Folder Include="GameData\QuickMute\Plugins\" />
+    <Folder Include="GameData\QuickMute\Textures\" />
+  </ItemGroup>
+</Project>
