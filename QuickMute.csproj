@@ -61,6 +61,9 @@
     <None Include="GameData\QuickMute\Textures\Icon_sound.png" />
     <None Include="GameData\QuickMute\Textures\StockToolBar_mute.png" />
     <None Include="GameData\QuickMute\Textures\StockToolBar_sound.png" />
+    <None Include="GameData\QuickMute\COPYING" />
+    <None Include="GameData\QuickMute\QuickMute.version" />
+    <None Include="GameData\QuickMute\README.md" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="GameData\" />
