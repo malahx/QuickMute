@@ -39,6 +39,10 @@ Delete the QuickMute folder in your KSP/GameData folder.
 
 #### Changelog
 
+v1.01 - 2015.02.X
+- Fix: Mute the sound after a switching scene,
+- Fix: Some FX sound could be heard.
+
 v1.00 - 2015.01.18
 - First release.
 
@@ -54,6 +58,8 @@ and to Squad for this awesome game.
 #### Links
 
 - http://forum.kerbalspaceprogram.com/threads/95168
+- https://kerbalstuff.com/mod/509/QuickMute
+- http://kerbal.curseforge.com/ksp-mods/227124-quickmute
 - https://github.com/malahx/QuickMute
 - Toolbar: http://forum.kerbalspaceprogram.com/threads/60863
 - Faenza icon theme: http://gnome-look.org/content/show.php/Faenza?content=128143

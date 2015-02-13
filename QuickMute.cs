@@ -23,7 +23,7 @@ using UnityEngine;
 namespace QuickMute {
 	[KSPAddon(KSPAddon.Startup.EveryScene, false)]
 	public class QuickMute : MonoBehaviour {
-		public static string VERSION = "1.00";
+		public static string VERSION = "1.01";
 		public static string MOD = "QuickMute";
 
 		private static bool isdebug = true;
@@ -49,9 +49,16 @@ namespace QuickMute {
 		private bool BlizzyToolBar = true;
 		[Persistent]
 		private bool Muted = false;
-
-		[KSPField(isPersistant = true)]
-		private static bool first = true;
+		[Persistent]
+		private float AMBIENCE_VOLUME = 0;
+		[Persistent]
+		private float MUSIC_VOLUME = 0;
+		[Persistent]
+		private float SHIP_VOLUME = 0;
+		[Persistent]
+		private float UI_VOLUME = 0;
+		[Persistent]
+		private float VOICE_VOLUME = 0;
 
 		private bool isBlizzyToolBar {
 			get {
@@ -61,10 +68,12 @@ namespace QuickMute {
 
 		private void Awake() {
 			Load ();
-			if (first && Muted) {
+			if (HighLogic.LoadedScene == GameScenes.SETTINGS) {
+				Mute (false);
+			} else if (Muted) {
 				Mute (true);
 			}
-			first = false;
+			GameEvents.onFlightReady.Add (OnFlightReady);
 			GameEvents.onGUIApplicationLauncherReady.Add (OnGUIApplicationLauncherReady);
 			if (BlizzyToolBar && HighLogic.LoadedSceneIsGame) {
 				BlizzyToolBar_Init ();
@@ -72,10 +81,22 @@ namespace QuickMute {
 		}
 
 		private void OnDestroy() {
+			GameEvents.onFlightReady.Remove (OnFlightReady);
 			GameEvents.onGUIApplicationLauncherReady.Remove (OnGUIApplicationLauncherReady);
 			StockToolBar_Destroy ();
 			if (BlizzyToolBar && HighLogic.LoadedSceneIsGame) {
 				BlizzyToolBar_Destroy ();
+			}
+		}
+
+		private void OnApplicationQuit() {
+			Mute (false);
+			GameSettings.SaveSettings ();
+		}
+
+		private void OnFlightReady() {
+			if (Muted) {
+				Mute (true);
 			}
 		}
 
@@ -136,10 +157,22 @@ namespace QuickMute {
 		}
 		public void Mute(bool mute) {
 			Muted = mute;
-			var _audios = Resources.FindObjectsOfTypeAll (typeof(AudioSource));
+			if (mute) {
+				SaveSettingsVolume ();
+				ResetSettingsVolume ();
+				MusicLogic.SetVolume (0);
+			} else {
+				LoadSavedVolume ();
+				ResetSavedVolume ();
+				MusicLogic.SetVolume (GameSettings.MUSIC_VOLUME);
+			}
+			/*var _audios = Resources.FindObjectsOfTypeAll (typeof(AudioSource));
 			foreach (AudioSource _audio in _audios) {
 				_audio.mute = Muted;
-			}
+				if (_audio.isPlaying) {
+					_audio.Stop ();
+				}
+			}*/
 			if (ApplicationLauncher.Ready && StockToolBar_Button != null) {
 				StockToolBar_Button.SetTexture (StockToolBar_Texture);
 				if (Muted && StockToolBar_Button.State == RUIToggleButton.ButtonState.FALSE) {
@@ -155,7 +188,7 @@ namespace QuickMute {
 			Log ((Muted ? "Mute" : "Unmute"));
 		}
 
-		// GESTION DE LA TOUCHE EXIT
+		// GESTION DE LA TOUCHE MUTE
 		private void Update() {
 			if (ApplicationLauncher.Ready && StockToolBar_Button != null) {
 				if (Muted && StockToolBar_Button.State == RUIToggleButton.ButtonState.FALSE) {
@@ -176,6 +209,54 @@ namespace QuickMute {
 				if ((DateTime.Now - Mute_Icon_Temp).TotalSeconds > 5) {
 					Mute_Icon_Temp = _date;
 				}
+			}
+		}
+		private bool VolumeSettingsIsZero {
+			get {
+				return GameSettings.AMBIENCE_VOLUME == 0 && GameSettings.MUSIC_VOLUME == 0 && GameSettings.SHIP_VOLUME == 0 && GameSettings.UI_VOLUME == 0 && GameSettings.VOICE_VOLUME == 0;
+			}
+		}
+		private bool VolumeSavedIsZero {
+			get {
+				return AMBIENCE_VOLUME == 0 && MUSIC_VOLUME == 0 && SHIP_VOLUME == 0 && UI_VOLUME == 0 && VOICE_VOLUME == 0;
+			}
+		}
+
+		// SAUVEGARDE DES VOLUMES
+		private void SaveSettingsVolume() {
+			if (!VolumeSettingsIsZero) {
+				AMBIENCE_VOLUME = GameSettings.AMBIENCE_VOLUME;
+				MUSIC_VOLUME = GameSettings.MUSIC_VOLUME;
+				SHIP_VOLUME = GameSettings.SHIP_VOLUME;
+				UI_VOLUME = GameSettings.UI_VOLUME;
+				VOICE_VOLUME = GameSettings.VOICE_VOLUME;
+			}
+		}
+		private void LoadSavedVolume() {
+			if (!VolumeSavedIsZero) {
+				GameSettings.AMBIENCE_VOLUME = AMBIENCE_VOLUME;
+				GameSettings.MUSIC_VOLUME = MUSIC_VOLUME;
+				GameSettings.SHIP_VOLUME = SHIP_VOLUME;
+				GameSettings.UI_VOLUME = UI_VOLUME;
+				GameSettings.VOICE_VOLUME = VOICE_VOLUME;
+			}
+		}
+		private void ResetSavedVolume() {
+			if (!VolumeSettingsIsZero) {
+				AMBIENCE_VOLUME = 0;
+				MUSIC_VOLUME = 0;
+				SHIP_VOLUME = 0;
+				UI_VOLUME = 0;
+				VOICE_VOLUME = 0;
+			}
+		}
+		private void ResetSettingsVolume() {
+			if (!VolumeSavedIsZero) {
+				GameSettings.AMBIENCE_VOLUME = 0;
+				GameSettings.MUSIC_VOLUME = 0;
+				GameSettings.SHIP_VOLUME = 0;
+				GameSettings.UI_VOLUME = 0;
+				GameSettings.VOICE_VOLUME = 0;
 			}
 		}
 
