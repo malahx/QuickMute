@@ -39,7 +39,7 @@ Delete the QuickMute folder in your KSP/GameData folder.
 
 #### Changelog
 
-v1.01 - 2015.02.X
+v1.01 - 2015.02.13
 - Fix: Mute the sound after a switching scene,
 - Fix: Some FX sound could be heard.
 
