@@ -1,5 +1,5 @@
 ﻿#### QuickMute
-#### A plugin for Kerbal Space Program 0.90.0
+#### A plugin for Kerbal Space Program 1.0.0
 #### Copyright 2015 Malah
 
 This program is free software: you can redistribute it and/or modify
@@ -33,33 +33,44 @@ You can change the shortcut and enable/disable toolbar's icons on the file "Game
 
 Unzip all files. Put the QuickMute folder in your KSP/GameData folder.
 
+#### How to update it?
+
+Unzip all files. Merge the new QuickMute folder with the old folder which is in your KSP/GameData folder.
+
 #### How to uninstall it?
 
 Delete the QuickMute folder in your KSP/GameData folder.
 
 #### Changelog
 
+v1.02 - 2015.04.28
+* Fix: Converted textures to DDS,
+* Fix: Corrected the Stock Toolbar icon not being created,
+* Fix: Deleted the default QuickMute's config file to keep your config file after an update,
+* Fix: Rewrited the code,
+* Updated to 1.00
+
 v1.01 - 2015.02.13
-- Fix: Mute the sound after a switching scene,
-- Fix: Some FX sound could be heard.
+* Fix: Mute the sound after a switching scene,
+* Fix: Some FX sound could be heard.
 
 v1.00 - 2015.01.18
-- First release.
+* First release.
 
 #### Thanks!
 
-to BinaryBad to have requested this mod,
-to blizzy for his Toolbar mod,
-to Matthieu James for the Faenza icon theme,
-to all other mod developers which make this game really huge,
-to my friend Neimad who corrects my bad english ...
-and to Squad for this awesome game.
+* to BinaryBad to have requested this mod,
+* to blizzy for his Toolbar mod,
+* to Matthieu James for the Faenza icon theme,
+* to all other mod developers which make this game really huge,
+* to my friend Neimad who corrects my bad english ...
+* and to Squad for this awesome game.
 
 #### Links
 
-- http://forum.kerbalspaceprogram.com/threads/95168
-- https://kerbalstuff.com/mod/509/QuickMute
-- http://kerbal.curseforge.com/ksp-mods/227124-quickmute
-- https://github.com/malahx/QuickMute
-- Toolbar: http://forum.kerbalspaceprogram.com/threads/60863
-- Faenza icon theme: http://gnome-look.org/content/show.php/Faenza?content=128143
+* http://forum.kerbalspaceprogram.com/threads/95168#QuickMute
+* https://kerbalstuff.com/mod/509/QuickMute
+* http://kerbal.curseforge.com/ksp-mods/227124-quickmute
+* https://github.com/malahx/QuickMute
+* Toolbar: http://forum.kerbalspaceprogram.com/threads/60863
+* Faenza icon theme: http://gnome-look.org/content/show.php/Faenza?content=128143

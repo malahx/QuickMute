@@ -1,4 +1,0 @@
-﻿Key = f10
-StockToolBar = true
-BlizzyToolBar = true
-Muted = false
