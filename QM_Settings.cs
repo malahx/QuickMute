@@ -29,11 +29,6 @@ namespace QuickMute {
 
 		[Persistent] internal string Key = "f10";
 		[Persistent] internal bool Muted = false;
-		[Persistent] internal float AMBIENCE_VOLUME = 0;
-		[Persistent] internal float MUSIC_VOLUME = 0;
-		[Persistent] internal float SHIP_VOLUME = 0;
-		[Persistent] internal float UI_VOLUME = 0;
-		[Persistent] internal float VOICE_VOLUME = 0;
 
 		[Persistent] internal bool StockToolBar = true;
 		[Persistent] internal bool BlizzyToolBar = true;

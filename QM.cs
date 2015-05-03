@@ -25,39 +25,34 @@ namespace QuickMute {
 	public class QuickMute : QMute {
 
 		internal static QuickMute Instance;
-		internal static QBlizzyToolbar BlizzyToolbar;
-		internal static QStockToolbar StockToolbar;
+		[KSPField(isPersistant = true)] internal static QBlizzyToolbar BlizzyToolbar;
+		[KSPField(isPersistant = true)] internal static QStockToolbar StockToolbar;
 
 		private void Awake() {
 			Instance = this;
-			QSettings.Instance.Load ();
-			BlizzyToolbar = new QBlizzyToolbar ();
-			StockToolbar = new QStockToolbar ();
+			if (BlizzyToolbar == null) BlizzyToolbar = new QBlizzyToolbar ();
+			if (StockToolbar == null) StockToolbar = new QStockToolbar ();
 			GameEvents.onGUIApplicationLauncherDestroyed.Add (StockToolbar.AppLauncherDestroyed);
 			GameEvents.onGameSceneLoadRequested.Add (StockToolbar.AppLauncherDestroyed);
+			GameEvents.onGUIApplicationLauncherUnreadifying.Add (StockToolbar.AppLauncherDestroyed);
 			GameEvents.onFlightReady.Add (OnFlightReady);
-			if (HighLogic.LoadedScene == GameScenes.SETTINGS) {
-				Mute (false);
-			} else if (QSettings.Instance.Muted) {
-				Mute (true);
-			}
 		}
 
 		private void Start() {
+		    QSettings.Instance.Load ();
 			BlizzyToolbar.Start ();
 			StartCoroutine (StockToolbar.AppLauncherReady ());
+			if (Muted) {
+				Mute (true);
+			}
 		}
 
 		private void OnDestroy() {
 			BlizzyToolbar.OnDestroy ();
 			GameEvents.onGUIApplicationLauncherDestroyed.Remove (StockToolbar.AppLauncherDestroyed);
 			GameEvents.onGameSceneLoadRequested.Remove (StockToolbar.AppLauncherDestroyed);
+			GameEvents.onGUIApplicationLauncherUnreadifying.Remove (StockToolbar.AppLauncherDestroyed);
 			GameEvents.onFlightReady.Remove (OnFlightReady);
-		}
-
-		private void OnApplicationQuit() {
-			Mute (false);
-			GameSettings.SaveSettings ();
 		}
 
 		private void OnFlightReady() {
@@ -78,7 +73,5 @@ namespace QuickMute {
 				GUILayout.EndArea ();
 			}
 		}
-
-
 	}
 }

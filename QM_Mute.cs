@@ -27,15 +27,15 @@ namespace QuickMute {
 		private string Icon_TexturePathSound = Quick.MOD + "/Textures/Icon_sound";
 		private string Icon_TexturePathMute = Quick.MOD + "/Textures/Icon_mute";
 
-		internal Texture2D Icon_Texture {
+		protected Texture2D Icon_Texture {
 			get {
 				return GameDatabase.Instance.GetTexture((QSettings.Instance.Muted ? Icon_TexturePathMute : Icon_TexturePathSound), false);
 			}
 		}
 
-		internal bool Draw = false;
+		protected bool Draw = false;
 
-		private bool Muted {
+		protected bool Muted {
 			get {
 				return QSettings.Instance.Muted;
 			}
@@ -60,74 +60,11 @@ namespace QuickMute {
 			Muted = mute;
 			QuickMute.BlizzyToolbar.Refresh ();
 			QuickMute.StockToolbar.Refresh ();
-			//QStockToolbar.Instance.Refresh ();
-			if (mute) {
-				SaveSettingsVolume ();
-				ResetSettingsVolume ();
-				MusicLogic.SetVolume (0);
-			} else {
-				LoadSavedVolume ();
-				ResetSavedVolume ();
-				MusicLogic.SetVolume (GameSettings.MUSIC_VOLUME);
-			}
-			/*var _audios = Resources.FindObjectsOfTypeAll (typeof(AudioSource));
+			AudioSource[] _audios = (AudioSource[])Resources.FindObjectsOfTypeAll (typeof(AudioSource));
 			foreach (AudioSource _audio in _audios) {
 				_audio.mute = Muted;
-				if (_audio.isPlaying) {
-					_audio.Stop ();
-				}
-			}*/
+			}
 			Quick.Log ((Muted ? "Mute" : "Unmute"));
-		}
-
-		private bool VolumeSettingsIsZero {
-			get {
-				return GameSettings.AMBIENCE_VOLUME == 0 && GameSettings.MUSIC_VOLUME == 0 && GameSettings.SHIP_VOLUME == 0 && GameSettings.UI_VOLUME == 0 && GameSettings.VOICE_VOLUME == 0;
-			}
-		}
-		private bool VolumeSavedIsZero {
-			get {
-				return QSettings.Instance.AMBIENCE_VOLUME == 0 && QSettings.Instance.MUSIC_VOLUME == 0 && QSettings.Instance.SHIP_VOLUME == 0 && QSettings.Instance.UI_VOLUME == 0 && QSettings.Instance.VOICE_VOLUME == 0;
-			}
-		}
-
-		// SAUVEGARDE DES VOLUMES
-		private void SaveSettingsVolume() {
-			if (!VolumeSettingsIsZero) {
-				QSettings.Instance.AMBIENCE_VOLUME = GameSettings.AMBIENCE_VOLUME;
-				QSettings.Instance.MUSIC_VOLUME = GameSettings.MUSIC_VOLUME;
-				QSettings.Instance.SHIP_VOLUME = GameSettings.SHIP_VOLUME;
-				QSettings.Instance.UI_VOLUME = GameSettings.UI_VOLUME;
-				QSettings.Instance.VOICE_VOLUME = GameSettings.VOICE_VOLUME;
-			}
-		}
-		private void LoadSavedVolume() {
-			if (!VolumeSavedIsZero) {
-				GameSettings.AMBIENCE_VOLUME = QSettings.Instance.AMBIENCE_VOLUME;
-				GameSettings.MUSIC_VOLUME = QSettings.Instance.MUSIC_VOLUME;
-				GameSettings.SHIP_VOLUME = QSettings.Instance.SHIP_VOLUME;
-				GameSettings.UI_VOLUME = QSettings.Instance.UI_VOLUME;
-				GameSettings.VOICE_VOLUME = QSettings.Instance.VOICE_VOLUME;
-			}
-		}
-		private void ResetSavedVolume() {
-			if (!VolumeSettingsIsZero) {
-				QSettings.Instance.AMBIENCE_VOLUME = 0;
-				QSettings.Instance.MUSIC_VOLUME = 0;
-				QSettings.Instance.SHIP_VOLUME = 0;
-				QSettings.Instance.UI_VOLUME = 0;
-				QSettings.Instance.VOICE_VOLUME = 0;
-			}
-		}
-		private void ResetSettingsVolume() {
-			if (!VolumeSavedIsZero) {
-				GameSettings.AMBIENCE_VOLUME = 0;
-				GameSettings.MUSIC_VOLUME = 0;
-				GameSettings.SHIP_VOLUME = 0;
-				GameSettings.UI_VOLUME = 0;
-				GameSettings.VOICE_VOLUME = 0;
-			}
 		}
 	}
 }
-
