@@ -23,9 +23,9 @@ QuickMute is a plugin which adds the possibility to mute all the KSP sounds.
 #### How does it work?
 
 You have three solutions to use QuickMute:
-- push on f10,
-- with the stock toolbar,
-- with the Blizzy Toolbar (an optional mod).
+* push on F6,
+* with the stock toolbar,
+* with the Blizzy Toolbar (an optional mod).
 
 You can change the shortcut and enable/disable toolbar's icons on the file "GameData/QuickMute/Config.txt"
 
@@ -42,6 +42,11 @@ Unzip all files. Merge the new QuickMute folder with the old folder which is in 
 Delete the QuickMute folder in your KSP/GameData folder.
 
 #### Changelog
+
+v1.04 - 2015.05.08
+* Fix: (again) Corrected the Stock Toolbar which can show two buttons,
+* Fix: Corrected the mute function for FX sounds (return with a GameSettings mute ...),
+* Fix: Changed the default mute shortcut to F6.
 
 v1.03 - 2015.05.03
 * Fix: Corrected the Stock Toolbar which can show two buttons,

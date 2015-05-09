@@ -26,22 +26,16 @@ namespace QuickMute {
 
 		internal static QuickMute Instance;
 		[KSPField(isPersistant = true)] internal static QBlizzyToolbar BlizzyToolbar;
-		[KSPField(isPersistant = true)] internal static QStockToolbar StockToolbar;
 
 		private void Awake() {
 			Instance = this;
 			if (BlizzyToolbar == null) BlizzyToolbar = new QBlizzyToolbar ();
-			if (StockToolbar == null) StockToolbar = new QStockToolbar ();
-			GameEvents.onGUIApplicationLauncherDestroyed.Add (StockToolbar.AppLauncherDestroyed);
-			GameEvents.onGameSceneLoadRequested.Add (StockToolbar.AppLauncherDestroyed);
-			GameEvents.onGUIApplicationLauncherUnreadifying.Add (StockToolbar.AppLauncherDestroyed);
-			GameEvents.onFlightReady.Add (OnFlightReady);
+			GameEvents.onVesselGoOffRails.Add(OnVesselGoOffRails);
 		}
 
 		private void Start() {
 		    QSettings.Instance.Load ();
 			BlizzyToolbar.Start ();
-			StartCoroutine (StockToolbar.AppLauncherReady ());
 			if (Muted) {
 				Mute (true);
 			}
@@ -49,16 +43,16 @@ namespace QuickMute {
 
 		private void OnDestroy() {
 			BlizzyToolbar.OnDestroy ();
-			GameEvents.onGUIApplicationLauncherDestroyed.Remove (StockToolbar.AppLauncherDestroyed);
-			GameEvents.onGameSceneLoadRequested.Remove (StockToolbar.AppLauncherDestroyed);
-			GameEvents.onGUIApplicationLauncherUnreadifying.Remove (StockToolbar.AppLauncherDestroyed);
-			GameEvents.onFlightReady.Remove (OnFlightReady);
+			GameEvents.onVesselGoOffRails.Remove(OnVesselGoOffRails);
 		}
 
-		private void OnFlightReady() {
-			if (QSettings.Instance.Muted) {
-				Mute (true);
-			}
+		private void OnVesselGoOffRails(Vessel vessel) {
+			VerifyMute ();
+		}
+
+		private void OnApplicationQuit() {
+			Mute (false);
+			GameSettings.SaveSettings ();
 		}
 
 		private void Update() {
@@ -66,6 +60,11 @@ namespace QuickMute {
 				Mute ();
 			}
 		}
+
+		/* It can mute FXGroups audio, but cost a high CPU usage ...
+		private void LateUpdate() {
+			VerifyMute ();
+		}*/
 
 		private void OnGUI() {
 			if (Draw) {

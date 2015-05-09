@@ -27,11 +27,17 @@ namespace QuickMute {
 
 		internal static string FileConfig = KSPUtil.ApplicationRootPath + "GameData/" + Quick.MOD + "/Config.txt";
 
-		[Persistent] internal string Key = "f10";
+		[Persistent] internal string Key = "f6";
 		[Persistent] internal bool Muted = false;
 
 		[Persistent] internal bool StockToolBar = true;
 		[Persistent] internal bool BlizzyToolBar = true;
+
+		[Persistent] internal float AMBIENCE_VOLUME = 0;
+		[Persistent] internal float MUSIC_VOLUME = 0;
+		[Persistent] internal float SHIP_VOLUME = 0;
+		[Persistent] internal float UI_VOLUME = 0;
+		[Persistent] internal float VOICE_VOLUME = 0;
 
 		public void Save() {
 			ConfigNode _temp = ConfigNode.CreateConfigFromObject(this, new ConfigNode());

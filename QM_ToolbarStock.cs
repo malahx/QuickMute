@@ -21,14 +21,21 @@ using System.Collections;
 using UnityEngine;
 
 namespace QuickMute {
-	public class QStockToolbar {
-	
+	[KSPAddon(KSPAddon.Startup.MainMenu, true)]
+	public class QStockToolbar : MonoBehaviour {
+
 		internal static bool Enabled {
 			get {
 				return QSettings.Instance.StockToolBar;
 			}
 		}
 
+		private static bool CanUseIt {
+			get {
+				return HighLogic.LoadedSceneIsGame;
+			}
+		}
+		
 		private ApplicationLauncher.AppScenes AppScenes = ApplicationLauncher.AppScenes.ALWAYS;
 		private static string TexturePathSound = Quick.MOD + "/Textures/StockToolBar_sound";
 		private static string TexturePathMute = Quick.MOD + "/Textures/StockToolBar_mute";
@@ -36,7 +43,7 @@ namespace QuickMute {
 		private void OnClick() { 
 			QuickMute.Instance.Mute ();
 		}
-			
+
 		private Texture2D GetTexture {
 			get {
 				return GameDatabase.Instance.GetTexture((QSettings.Instance.Muted ? TexturePathMute : TexturePathSound), false);
@@ -51,28 +58,50 @@ namespace QuickMute {
 			}
 		}
 
-		internal IEnumerator AppLauncherReady() {
-			if (!Enabled || !HighLogic.LoadedSceneIsGame) {
-				yield break;
+		internal static QStockToolbar Instance {
+			get;
+			private set;
+		}
+
+		private void Awake() {
+			if (Instance != null) {
+				Destroy (this);
+				return;
 			}
-			while (!isAvailable) {
-				yield return 0;
+			Instance = this;
+			DontDestroyOnLoad (Instance);
+			GameEvents.onGUIApplicationLauncherReady.Add (AppLauncherReady);
+			GameEvents.onGUIApplicationLauncherDestroyed.Add (AppLauncherDestroyed);
+			GameEvents.onLevelWasLoadedGUIReady.Add (AppLauncherDestroyed);
+		}
+			
+		private void AppLauncherReady() {
+			QSettings.Instance.Load ();
+			if (!Enabled) {
+				return;
 			}
 			Init ();
-			yield return new WaitForEndOfFrame ();
-			Refresh ();
 		}
 
-		internal void AppLauncherDestroyed(GameScenes gameScenes) {
-			AppLauncherDestroyed ();
+		private void AppLauncherDestroyed(GameScenes gameScene) {
+			if (CanUseIt) {
+				return;
+			}
+			Destroy ();
 		}
-
-		internal void AppLauncherDestroyed() {
+		
+		private void AppLauncherDestroyed() {
 			Destroy ();
 		}
 
+		private void OnDestroy() {
+			GameEvents.onGUIApplicationLauncherReady.Remove (AppLauncherReady);
+			GameEvents.onGUIApplicationLauncherDestroyed.Remove (AppLauncherDestroyed);
+			GameEvents.onLevelWasLoadedGUIReady.Remove (AppLauncherDestroyed);
+		}
+
 		private void Init() {
-			if (!isAvailable) {
+			if (!isAvailable || !CanUseIt) {
 				return;
 			}
 			if (appLauncherButton == null) {
@@ -81,9 +110,6 @@ namespace QuickMute {
 		}
 
 		private void Destroy() {
-			if (!isAvailable) {
-				return;
-			}
 			if (appLauncherButton != null) {
 				ApplicationLauncher.Instance.RemoveModApplication (appLauncherButton);
 				appLauncherButton = null;
@@ -104,6 +130,18 @@ namespace QuickMute {
 						appLauncherButton.SetFalse (force);
 					}
 				}
+			}
+		}
+
+		internal void Reset() {
+			if (appLauncherButton != null) {
+				Set (false);
+				if (!Enabled) {
+					Destroy ();
+				}
+			}
+			if (Enabled) {
+				Init ();
 			}
 		}
 
