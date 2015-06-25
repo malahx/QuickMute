@@ -1,5 +1,5 @@
 ﻿#### QuickMute
-#### A plugin for Kerbal Space Program 1.0.2
+#### A plugin for Kerbal Space Program 1.0.X
 #### Copyright 2015 Malah
 
 This program is free software: you can redistribute it and/or modify
@@ -43,7 +43,10 @@ Delete the QuickMute folder in your KSP/GameData folder.
 
 #### Changelog
 
-v1.04 - 2015.05.08
+v1.05 - 2015.06.25
+* Updated to KSP 1.0.X
+
+v1.04 - 2015.05.09
 * Fix: (again) Corrected the Stock Toolbar which can show two buttons,
 * Fix: Corrected the mute function for FX sounds (return with a GameSettings mute ...),
 * Fix: Changed the default mute shortcut to F6.
@@ -54,14 +57,14 @@ v1.03 - 2015.05.03
 * Fix: Corrected the AutoMute at the loading of a gamescene to enable an unmute,
 * Fix: Deleted all functions which use the GameSettings,
 * Updated ToolbarWrapper to 1.7.9
-* Updated to KSP 1.02
+* Updated to KSP 1.0.2
 
 v1.02 - 2015.04.28
 * Fix: Converted textures to DDS,
 * Fix: Corrected the Stock Toolbar icon not being created,
 * Fix: Deleted the default QuickMute's config file to keep your config file after an update,
 * Fix: Rewrited the code,
-* Updated to KSP 1.00
+* Updated to KSP 1.0.0
 
 v1.01 - 2015.02.13
 * Fix: Mute the sound after a switching scene,
