@@ -43,6 +43,9 @@ Delete the QuickMute folder in your KSP/GameData folder.
 
 #### Changelog
 
+v1.06 - 2015.06.26
+* Fix: Corrected the unmute sounds on the editor (thanks Delmundo for this report).
+
 v1.05 - 2015.06.25
 * Updated to KSP 1.0.X
 

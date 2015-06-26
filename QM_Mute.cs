@@ -28,6 +28,8 @@ namespace QuickMute {
 		private string Icon_TexturePathSound = Quick.MOD + "/Textures/Icon_sound";
 		private string Icon_TexturePathMute = Quick.MOD + "/Textures/Icon_mute";
 
+		private Dictionary<string, float> audioVolume = new Dictionary<string, float>();
+
 		protected Texture2D Icon_Texture {
 			get {
 				return GameDatabase.Instance.GetTexture((Muted ? Icon_TexturePathMute : Icon_TexturePathSound), false);
@@ -49,10 +51,19 @@ namespace QuickMute {
 			if (!Muted) {
 				return;
 			}
+			audioSourceMute ();
+		}
+
+		private void audioSourceMute() {
 			AudioSource[] _audios = (AudioSource[])Resources.FindObjectsOfTypeAll (typeof(AudioSource));
 			foreach (AudioSource _audio in _audios) {
-				if (_audio.mute != Muted) {
-					_audio.mute = Muted;
+				if (Muted) {
+					audioVolume [_audio.name] = _audio.volume;
+					_audio.volume = 0;
+				} else {
+					if (audioVolume.ContainsKey (_audio.name)) {
+						_audio.volume = audioVolume [_audio.name];
+					}
 				}
 			}
 		}
@@ -77,10 +88,7 @@ namespace QuickMute {
 			if (QStockToolbar.Instance != null) {
 				QStockToolbar.Instance.Refresh ();
 			}
-			AudioSource[] _audios = (AudioSource[])Resources.FindObjectsOfTypeAll (typeof(AudioSource));
-			foreach (AudioSource _audio in _audios) {
-				_audio.mute = Muted;
-			}
+			audioSourceMute ();
 			if (Muted) {
 				SaveSettingsVolume ();
 				ResetSettingsVolume ();
