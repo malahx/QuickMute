@@ -1,6 +1,6 @@
 ﻿/* 
 QuickMute
-Copyright 2015 Malah
+Copyright 2016 Malah
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -33,11 +33,11 @@ namespace QuickMute {
 		[Persistent] internal bool StockToolBar = true;
 		[Persistent] internal bool BlizzyToolBar = true;
 
-		[Persistent] internal float AMBIENCE_VOLUME = 0;
+		/*[Persistent] internal float AMBIENCE_VOLUME = 0;
 		[Persistent] internal float MUSIC_VOLUME = 0;
 		[Persistent] internal float SHIP_VOLUME = 0;
 		[Persistent] internal float UI_VOLUME = 0;
-		[Persistent] internal float VOICE_VOLUME = 0;
+		[Persistent] internal float VOICE_VOLUME = 0;*/
 
 		public void Save() {
 			ConfigNode _temp = ConfigNode.CreateConfigFromObject(this, new ConfigNode());

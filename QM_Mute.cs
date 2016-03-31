@@ -1,6 +1,6 @@
 ﻿/* 
 Quick0
-Copyright 2015 Malah
+Copyright 2016 Malah
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ namespace QuickMute {
 		private string Icon_TexturePathSound = Quick.MOD + "/Textures/Icon_sound";
 		private string Icon_TexturePathMute = Quick.MOD + "/Textures/Icon_mute";
 
-		private Dictionary<string, float> audioVolume = new Dictionary<string, float>();
+		//private Dictionary<string, float> audioVolume = new Dictionary<string, float>();
 
 		protected Texture2D Icon_Texture {
 			get {
@@ -57,14 +57,15 @@ namespace QuickMute {
 		private void audioSourceMute() {
 			AudioSource[] _audios = (AudioSource[])Resources.FindObjectsOfTypeAll (typeof(AudioSource));
 			foreach (AudioSource _audio in _audios) {
-				if (Muted) {
+				/*if (Muted) {
 					audioVolume [_audio.name] = _audio.volume;
 					_audio.volume = 0;
 				} else {
 					if (audioVolume.ContainsKey (_audio.name)) {
 						_audio.volume = audioVolume [_audio.name];
 					}
-				}
+				}*/
+				_audio.mute = Muted;
 			}
 		}
 
@@ -89,7 +90,7 @@ namespace QuickMute {
 				QStockToolbar.Instance.Refresh ();
 			}
 			audioSourceMute ();
-			if (Muted) {
+			/*if (Muted) {
 				SaveSettingsVolume ();
 				ResetSettingsVolume ();
 				MusicLogic.SetVolume (0);
@@ -97,11 +98,11 @@ namespace QuickMute {
 				LoadSavedVolume ();
 				ResetSavedVolume ();
 				MusicLogic.SetVolume (GameSettings.MUSIC_VOLUME);
-			}
+			}*/
 			Quick.Log ((Muted ? "Mute" : "Unmute"));
 		}
 
-		private bool VolumeSettingsIsZero {
+		/*private bool VolumeSettingsIsZero {
 			get {
 				return GameSettings.AMBIENCE_VOLUME == 0 && GameSettings.MUSIC_VOLUME == 0 && GameSettings.SHIP_VOLUME == 0 && GameSettings.UI_VOLUME == 0 && GameSettings.VOICE_VOLUME == 0;
 			}
@@ -146,6 +147,6 @@ namespace QuickMute {
 				GameSettings.UI_VOLUME = 0;
 				GameSettings.VOICE_VOLUME = 0;
 			}
-		}
+		}*/
 	}
 }

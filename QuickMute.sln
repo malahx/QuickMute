@@ -15,7 +15,6 @@ Global
 		{44ADA825-2207-4A6B-9410-8B857A847C13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		description = @#### QuickMute\n#### A plugin for Kerbal Space Program\n#### Copyright 2015 Malah
-		version = 1.06
+		version = 
 	EndGlobalSection
 EndGlobal

@@ -1,6 +1,6 @@
 ﻿/* 
 QuickMute
-Copyright 2015 Malah
+Copyright 2016 Malah
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -16,6 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. 
 */
 
+using KSP.UI.Screens;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -122,11 +123,11 @@ namespace QuickMute {
 			}
 			if (appLauncherButton != null) {
 				if (SetTrue) {
-					if (appLauncherButton.State == RUIToggleButton.ButtonState.FALSE) {
+					if (appLauncherButton.toggleButton.CurrentState == KSP.UI.UIRadioButton.State.False) {
 						appLauncherButton.SetTrue (force);
 					}
 				} else {
-					if (appLauncherButton.State == RUIToggleButton.ButtonState.TRUE) {
+					if (appLauncherButton.toggleButton.CurrentState == KSP.UI.UIRadioButton.State.True) {
 						appLauncherButton.SetFalse (force);
 					}
 				}
@@ -147,10 +148,10 @@ namespace QuickMute {
 
 		internal void Refresh() {
 			if (appLauncherButton != null) {
-				if (QSettings.Instance.Muted && appLauncherButton.State == RUIToggleButton.ButtonState.FALSE) {
+				if (QSettings.Instance.Muted && appLauncherButton.toggleButton.CurrentState == KSP.UI.UIRadioButton.State.False) {
 					appLauncherButton.SetTrue (false);
 				}
-				if (!QSettings.Instance.Muted && appLauncherButton.State == RUIToggleButton.ButtonState.TRUE) {
+				if (!QSettings.Instance.Muted && appLauncherButton.toggleButton.CurrentState == KSP.UI.UIRadioButton.State.True) {
 					appLauncherButton.SetFalse (false);
 				}
 				appLauncherButton.SetTexture (GetTexture);

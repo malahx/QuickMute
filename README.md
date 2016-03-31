@@ -1,6 +1,6 @@
 ﻿#### QuickMute
-#### A plugin for Kerbal Space Program 1.0.X
-#### Copyright 2015 Malah
+#### A plugin for Kerbal Space Program
+#### Copyright 2016 Malah
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -42,6 +42,11 @@ Unzip all files. Merge the new QuickMute folder with the old folder which is in 
 Delete the QuickMute folder in your KSP/GameData folder.
 
 #### Changelog
+
+v1.07-pre1 - 2016.03.31
+* Fix: Deleted all functions which use the GameSettings,
+* Fix: Deleted functions which save AudioSource sound level,
+* Compiled against KSP 1.1.0.1172
 
 v1.06 - 2015.06.26
 * Fix: Corrected the unmute sounds on the editor (thanks Delmundo for this report).
