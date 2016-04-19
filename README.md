@@ -43,6 +43,9 @@ Delete the QuickMute folder in your KSP/GameData folder.
 
 #### Changelog
 
+v1.08 - 2016.03.31
+* Compiled against KSP 1.1.0.1230
+
 v1.07-pre1 - 2016.03.31
 * Fix: Deleted all functions which use the GameSettings,
 * Fix: Deleted functions which save AudioSource sound level,
