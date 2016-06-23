@@ -38,7 +38,6 @@
     <Compile Include="ToolbarWrapper.cs" />
     <Compile Include="QM.cs" />
     <Compile Include="QM_Settings.cs" />
-    <Compile Include="QM_Quick.cs" />
     <Compile Include="QM_Mute.cs" />
     <Compile Include="QM_ToolbarBlizzy.cs" />
     <Compile Include="QM_ToolbarStock.cs" />
@@ -59,6 +58,7 @@
     <None Include="GameData\QuickMute\Textures\Icon_sound.dds" />
     <None Include="GameData\QuickMute\Textures\StockToolBar_mute.dds" />
     <None Include="GameData\QuickMute\Textures\StockToolBar_sound.dds" />
+    <None Include="QM_Quick.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="GameData\" />

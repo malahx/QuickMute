@@ -23,10 +23,12 @@ using UnityEngine;
 
 
 namespace QuickMute {
-	public class QMute : Quick {
+	public partial class QuickMute {
 	
-		private string Icon_TexturePathSound = Quick.MOD + "/Textures/Icon_sound";
-		private string Icon_TexturePathMute = Quick.MOD + "/Textures/Icon_mute";
+		private string Icon_TexturePathSound = MOD + "/Textures/Icon_sound";
+		private string Icon_TexturePathMute = MOD + "/Textures/Icon_mute";
+
+		private Coroutine wait;
 
 		//private Dictionary<string, float> audioVolume = new Dictionary<string, float>();
 
@@ -52,6 +54,7 @@ namespace QuickMute {
 				return;
 			}
 			audioSourceMute ();
+			Log ("VerifyMute", "QuickMute");
 		}
 
 		private void audioSourceMute() {
@@ -67,18 +70,26 @@ namespace QuickMute {
 				}*/
 				_audio.mute = Muted;
 			}
+			Log ("audioSourceMute", "QuickMute");
+
 		}
 
 		public void Mute() {
 			Mute (!Muted);
 			Draw = true;
-			StartCoroutine (Wait (5));
+			if (wait != null) {
+				StopCoroutine (wait);
+			}
+			wait = StartCoroutine (Wait (5));
 			QSettings.Instance.Save ();
+			Log ("Mute()", "QuickMute");
 		}
 
 		private IEnumerator Wait(int seconds) {
 			yield return new WaitForSeconds (seconds);
 			Draw = false;
+			wait = null;
+			Log ("Wait", "QuickMute");
 		}
 
 		public void Mute(bool mute) {
@@ -90,7 +101,7 @@ namespace QuickMute {
 				QStockToolbar.Instance.Refresh ();
 			}
 			audioSourceMute ();
-			/*if (Muted) {
+			if (Muted) {
 				SaveSettingsVolume ();
 				ResetSettingsVolume ();
 				MusicLogic.SetVolume (0);
@@ -98,11 +109,11 @@ namespace QuickMute {
 				LoadSavedVolume ();
 				ResetSavedVolume ();
 				MusicLogic.SetVolume (GameSettings.MUSIC_VOLUME);
-			}*/
-			Quick.Log ((Muted ? "Mute" : "Unmute"));
+			}
+			Log ((Muted ? "Mute" : "Unmute"));
 		}
 
-		/*private bool VolumeSettingsIsZero {
+		private bool VolumeSettingsIsZero {
 			get {
 				return GameSettings.AMBIENCE_VOLUME == 0 && GameSettings.MUSIC_VOLUME == 0 && GameSettings.SHIP_VOLUME == 0 && GameSettings.UI_VOLUME == 0 && GameSettings.VOICE_VOLUME == 0;
 			}
@@ -147,6 +158,6 @@ namespace QuickMute {
 				GameSettings.UI_VOLUME = 0;
 				GameSettings.VOICE_VOLUME = 0;
 			}
-		}*/
+		}
 	}
 }

@@ -43,7 +43,12 @@ Delete the QuickMute folder in your KSP/GameData folder.
 
 #### Changelog
 
-v1.08 - 2016.03.31
+v1.09 - 2016.06.23
+* Fix: (again) Corrected the mute function for FX sounds (return with a GameSettings mute ...),
+* Fix: Enhanced the settings functions,
+* Compiled against KSP 1.1.3.1289
+
+v1.08 - 2016.04.19
 * Compiled against KSP 1.1.0.1230
 
 v1.07-pre1 - 2016.03.31

@@ -27,8 +27,8 @@ namespace QuickMute {
 				return QSettings.Instance.BlizzyToolBar;
 			}
 		}
-		private string TexturePathSound = Quick.MOD + "/Textures/BlizzyToolBar_sound";
-		private string TexturePathMute = Quick.MOD + "/Textures/BlizzyToolBar_mute";
+		private string TexturePathSound = QuickMute.MOD + "/Textures/BlizzyToolBar_sound";
+		private string TexturePathMute = QuickMute.MOD + "/Textures/BlizzyToolBar_mute";
 
 		private void OnClick() { 
 			QuickMute.Instance.Mute ();
@@ -52,9 +52,9 @@ namespace QuickMute {
 			if (!HighLogic.LoadedSceneIsGame || !isAvailable || !Enabled || Button != null) {
 				return;
 			}
-			Button = ToolbarManager.Instance.add (Quick.MOD, Quick.MOD);
+			Button = ToolbarManager.Instance.add (QuickMute.MOD, QuickMute.MOD);
 			Button.TexturePath = TexturePath;
-			Button.ToolTip = Quick.MOD;
+			Button.ToolTip = QuickMute.MOD;
 			Button.OnClick += (e) => OnClick ();
 		}
 

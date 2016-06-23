@@ -37,9 +37,9 @@ namespace QuickMute {
 			}
 		}
 		
-		private ApplicationLauncher.AppScenes AppScenes = ApplicationLauncher.AppScenes.ALWAYS;
-		private static string TexturePathSound = Quick.MOD + "/Textures/StockToolBar_sound";
-		private static string TexturePathMute = Quick.MOD + "/Textures/StockToolBar_mute";
+		private ApplicationLauncher.AppScenes AppScenes = ApplicationLauncher.AppScenes.FLIGHT | ApplicationLauncher.AppScenes.MAPVIEW | ApplicationLauncher.AppScenes.SPACECENTER | ApplicationLauncher.AppScenes.SPH | ApplicationLauncher.AppScenes.TRACKSTATION | ApplicationLauncher.AppScenes.VAB;
+		private static string TexturePathSound = QuickMute.MOD + "/Textures/StockToolBar_sound";
+		private static string TexturePathMute = QuickMute.MOD + "/Textures/StockToolBar_mute";
 
 		private void OnClick() { 
 			QuickMute.Instance.Mute ();
@@ -77,7 +77,7 @@ namespace QuickMute {
 		}
 			
 		private void AppLauncherReady() {
-			QSettings.Instance.Load ();
+			//QSettings.Instance.Load ();
 			if (!Enabled) {
 				return;
 			}

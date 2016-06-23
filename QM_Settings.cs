@@ -23,9 +23,21 @@ using UnityEngine;
 namespace QuickMute {
 	public class QSettings : MonoBehaviour {
 
-		public readonly static QSettings Instance = new QSettings();
+		[KSPField(isPersistant = true)]	private static readonly QSettings instance = new QSettings ();
+		public static QSettings Instance {
+			get {
+				if (!instance.isLoaded) {
+					instance.Load ();
+				}
+				return instance;
+			}
+		}
 
-		internal static string FileConfig = KSPUtil.ApplicationRootPath + "GameData/" + Quick.MOD + "/Config.txt";
+		internal static string FileConfig = KSPUtil.ApplicationRootPath + "GameData/" + QuickMute.MOD + "/Config.txt";
+
+		[KSPField(isPersistant = true)]	private bool isLoaded = false;
+
+		[Persistent] internal bool Debug = true;
 
 		[Persistent] internal string Key = "f6";
 		[Persistent] internal bool Muted = false;
@@ -33,16 +45,16 @@ namespace QuickMute {
 		[Persistent] internal bool StockToolBar = true;
 		[Persistent] internal bool BlizzyToolBar = true;
 
-		/*[Persistent] internal float AMBIENCE_VOLUME = 0;
+		[Persistent] internal float AMBIENCE_VOLUME = 0;
 		[Persistent] internal float MUSIC_VOLUME = 0;
 		[Persistent] internal float SHIP_VOLUME = 0;
 		[Persistent] internal float UI_VOLUME = 0;
-		[Persistent] internal float VOICE_VOLUME = 0;*/
+		[Persistent] internal float VOICE_VOLUME = 0;
 
 		public void Save() {
 			ConfigNode _temp = ConfigNode.CreateConfigFromObject(this, new ConfigNode());
 			_temp.Save(FileConfig);
-			Quick.Log ("Settings Saved");
+			QuickMute.Log ("Settings Saved", "QSettings",  true);
 		}
 		public void Load() {
 			if (File.Exists (FileConfig)) {
@@ -52,10 +64,11 @@ namespace QuickMute {
 				} catch {
 					Save ();
 				}
-				Quick.Log ("Settings Loaded");
+				QuickMute.Log ("Settings Loaded", "QSettings",  true);
 			} else {
 				Save ();
 			}
+			isLoaded = true;
 		}
 	}
 }
