@@ -16,9 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. 
 */
 
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -59,7 +57,8 @@ namespace QuickMute {
 
 		private void audioSourceMute() {
 			AudioSource[] _audios = (AudioSource[])Resources.FindObjectsOfTypeAll (typeof(AudioSource));
-			foreach (AudioSource _audio in _audios) {
+			for (int _i = _audios.Length - 1; _i >= 0; --_i) {
+				AudioSource _audio = _audios[_i];
 				/*if (Muted) {
 					audioVolume [_audio.name] = _audio.volume;
 					_audio.volume = 0;
@@ -71,7 +70,6 @@ namespace QuickMute {
 				_audio.mute = Muted;
 			}
 			Log ("audioSourceMute", "QuickMute");
-
 		}
 
 		public void Mute() {

@@ -16,7 +16,6 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. 
 */
 
-using System;
 using System.Reflection;
 using UnityEngine;
 
@@ -28,8 +27,8 @@ namespace QuickMute {
 		internal static QuickMute Instance;
 		[KSPField(isPersistant = true)] internal static QBlizzyToolbar BlizzyToolbar;
 
-		public readonly static string VERSION = Assembly.GetAssembly(typeof(QuickMute)).GetName().Version.Major + "." + Assembly.GetAssembly(typeof(QuickMute)).GetName().Version.Minor + Assembly.GetAssembly(typeof(QuickMute)).GetName().Version.Build;
-		public readonly static string MOD = Assembly.GetAssembly(typeof(QuickMute)).GetName().Name;
+		public readonly static string VERSION = Assembly.GetExecutingAssembly ().GetName ().Version.Major + "." + Assembly.GetExecutingAssembly ().GetName ().Version.Minor + Assembly.GetExecutingAssembly ().GetName ().Version.Build;
+		public readonly static string MOD = Assembly.GetExecutingAssembly ().GetName ().Name;
 
 		internal static void Log(string String, string Title = null, bool force = false) {
 			if (!force) {

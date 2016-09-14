@@ -1,27 +1,27 @@
 {
 	"NAME"				: "QuickMute",
 	"URL"				: "https://raw.githubusercontent.com/malahx/QuickMute/master/QuickMute.version",
-	"CHANGE_LOG_URL"	: "https://raw.githubusercontent.com/malahx/QuickMute/master/README.md", 
+	"CHANGE_LOG_URL"		: "https://raw.githubusercontent.com/malahx/QuickMute/master/README.md", 
 	"DOWNLOAD"			: "https://github.com/malahx/QuickMute/releases",
 	"VERSION": {
 		"MAJOR"			: 1,
-		"MINOR"			: 0,
-		"PATCH"			: 9,
+		"MINOR"			: 1,
+		"PATCH"			: 0,
 		"BUILD"			: 0
 	},
-    "KSP_VERSION": {
-        "MAJOR"			: 1,
-        "MINOR"			: 1,
-        "PATCH"			: 2
-    },
-    "KSP_VERSION_MIN": {
-        "MAJOR"			: 1,
-        "MINOR"			: 1,
-        "PATCH"			: 0
-    },
-    "KSP_VERSION_MAX": {
-        "MAJOR"			: 1,
-        "MINOR"			: 1,
-        "PATCH"			: 99
-    }
+	"KSP_VERSION": {
+		"MAJOR"			: 1,
+		"MINOR"			: 2,
+		"PATCH"			: 0
+	},
+	"KSP_VERSION_MIN": {
+		"MAJOR"			: 1,
+		"MINOR"			: 2,
+		"PATCH"			: 0
+	},
+	"KSP_VERSION_MAX": {
+		"MAJOR"			: 1,
+		"MINOR"			: 2,
+		"PATCH"			: 99
+	}
 }

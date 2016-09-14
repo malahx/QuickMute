@@ -43,6 +43,12 @@ Delete the QuickMute folder in your KSP/GameData folder.
 
 #### Changelog
 
+v1.10 - 2016.09.14
+* Fix: Deleted foreach function,
+* Fix: Deleted useless libraries,
+* Fix: Corrected .version file
+* Compiled against KSP 1.2.0.1473
+
 v1.09 - 2016.06.23
 * Fix: (again) Corrected the mute function for FX sounds (return with a GameSettings mute ...),
 * Fix: Enhanced the settings functions,
@@ -101,7 +107,7 @@ v1.00 - 2015.01.18
 #### Links
 
 * http://forum.kerbalspaceprogram.com/threads/95168#QuickMute
-* https://kerbalstuff.com/mod/509/QuickMute
+* http://spacedock.info/mod/108/QuickMute
 * http://kerbal.curseforge.com/ksp-mods/227124-quickmute
 * https://github.com/malahx/QuickMute
 * Toolbar: http://forum.kerbalspaceprogram.com/threads/60863
