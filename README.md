@@ -43,6 +43,9 @@ Delete the QuickMute folder in your KSP/GameData folder.
 
 #### Changelog
 
+v1.11 - 2016.09.15
+* Compiled against KSP 1.2.0.1586
+
 v1.10 - 2016.09.14
 * Fix: Deleted foreach function,
 * Fix: Deleted useless libraries,
